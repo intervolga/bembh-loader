@@ -1,0 +1,51 @@
+{
+  "name": "intervolga-bembh-loader",
+  "version": "1.0.0",
+  "description": "BemJson loader for WebPack 2",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint index.js lib test/index.js",
+    "test": "mocha --ui tdd test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shkarupa-alex/bembh-loader.git"
+  },
+  "keywords": [
+    "bembh",
+    "webpack",
+    "loader"
+  ],
+  "author": "Shkarupa Alex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shkarupa-alex/bembh-loader/issues"
+  },
+  "homepage": "https://github.com/shkarupa-alex/bembh-loader#readme",
+  "peerDependencies": {
+    "webpack": "^2.0.0"
+  },
+  "dependencies": {
+    "loader-utils": "^1.1.0",
+    "node-eval": "^1.1.0",
+    "bh": "^4.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "expect.js": "^0.3.1",
+    "intervolga-bemdeps-loader": "git+https://github.com/shkarupa-alex/bemdeps-loader.git",
+    "intervolga-bemfs-loader": "git+https://github.com/shkarupa-alex/bemfs-loader.git",
+    "intervolga-bemjson-loader": "git+https://github.com/shkarupa-alex/bemjson-loader.git",
+    "mocha": "^3.3.0",
+    "webpack": "^2.5.1"
+  },
+  "files": [
+    "lib",
+    "index.js",
+    "README",
+    "LICENSE"
+  ]
+}

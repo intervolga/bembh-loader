@@ -1,0 +1,10 @@
+{
+  "bemjson": "123",
+  "bemdecl": [],
+  "bemdeps": {
+    "styles": [],
+    "scripts": [],
+    "html": []
+  },
+  "bemfs": []
+}

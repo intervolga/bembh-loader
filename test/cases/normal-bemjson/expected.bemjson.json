@@ -4,15 +4,9 @@
     "content": [
       {
         "block": "ua",
-        "content": [
-          "(function(e,c){",
-          "e[c]=e[c].replace(/(ua_js_)no/g,\"$1yes\");",
-          "})(document.documentElement,\"className\");"
-        ],
-        "mods": {},
-        "__func6": true,
-        "bem": false,
-        "tag": "script"
+        "content": {
+          "elem": "modern"
+        }
       },
       {
         "block": "datepicker",
@@ -31,13 +25,9 @@
         "content": [
           {
             "elem": "star",
-            "content": "star content",
-            "block": "rating",
-            "elemMods": {},
-            "mods": {}
+            "content": "star content"
           }
-        ],
-        "mods": {}
+        ]
       },
       {
         "block": "news-list",
@@ -47,12 +37,9 @@
             "elemMods": {
               "active": false
             },
-            "content": "star content",
-            "block": "news-list",
-            "mods": {}
+            "content": "star content"
           }
-        ],
-        "mods": {}
+        ]
       },
       {
         "block": "b1",
@@ -66,9 +53,7 @@
             "content": [
               "This is normal bemjson",
               3
-            ],
-            "block": "b1",
-            "mods": {}
+            ]
           },
           {
             "elem": "e2",
@@ -81,13 +66,9 @@
               },
               {
                 "block": "b3",
-                "content": "blah",
-                "mods": {}
+                "content": "blah"
               }
-            ],
-            "block": "b1",
-            "elemMods": {},
-            "mods": {}
+            ]
           },
           {
             "block": "b2",
@@ -99,12 +80,8 @@
                   {
                     "block": "b1",
                     "content": {
-                      "elem": "e3",
-                      "block": "b1",
-                      "elemMods": {},
-                      "mods": {}
-                    },
-                    "mods": {}
+                      "elem": "e3"
+                    }
                   },
                   {
                     "block": "b1",
@@ -112,25 +89,13 @@
                       "b1m1": "v1"
                     }
                   }
-                ],
-                "block": "b2",
-                "elemMods": {},
-                "mods": {}
-              },
-              "block": "b2",
-              "elemMods": {},
-              "mods": {}
-            },
-            "mods": {}
+                ]
+              }
+            }
           }
-        ],
-        "mods": {}
-      },
-      null
-    ],
-    "mods": {},
-    "__func0": true,
-    "tag": "body"
+        ]
+      }
+    ]
   },
   "bemdecl": [
     {

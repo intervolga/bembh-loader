@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const vm = require('vm');
 const generateConfig = require('./generate-config');
 
 module.exports = (entry, stringify) => {

@@ -59,7 +59,12 @@ module.exports = (entry, stringify = null) => {
     ],
   };
   if (null !== stringify) {
-    loaderConfig.use[1].options = {stringify: stringify};
+    loaderConfig.use[1].options = loaderConfig.use[1].options || {};
+    loaderConfig.use[1].options.stringify = stringify;
+    loaderConfig.use[2].options = loaderConfig.use[2].options || {};
+    loaderConfig.use[2].options.stringify = stringify;
+    loaderConfig.use[3].options = loaderConfig.use[3].options || {};
+    loaderConfig.use[3].options.stringify = stringify;
   }
 
   config.module.loaders.push(loaderConfig);

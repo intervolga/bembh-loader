@@ -39,21 +39,21 @@ module.exports = (entry, stringify = null) => {
         options: {},
       },
       {
-        loader: 'intervolga-bemfs-loader',
+        loader: '@intervolga/bemfs-loader',
         options: {
           levels: levels,
           techMap: techMap,
         },
       },
       {
-        loader: 'intervolga-bemdeps-loader',
+        loader: '@intervolga/bemdeps-loader',
         options: {
           levels: levels,
           techMap: techMap,
         },
       },
       {
-        loader: 'intervolga-bemjson-loader',
+        loader: '@intervolga/bemjson-loader',
         options: {},
       },
     ],

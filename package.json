@@ -4,8 +4,9 @@
   "description": "BEM BH (https://en.bem.info/technology/bh/) loader for WebPack 2+",
   "main": "index.js",
   "scripts": {
+    "mocha": "mocha --ui tdd test/",
     "lint": "eslint index.js lib test/index.js test/helpers",
-    "test": "npm run lint && mocha --ui tdd test/"
+    "test": "npm run lint && npm run mocha"
   },
   "repository": {
     "type": "git",
@@ -26,20 +27,22 @@
     "webpack": "^3.0.0"
   },
   "dependencies": {
+    "@intervolga/eval-loader": "^1.0.1",
     "bh": "^4.2.1",
     "js-beautify": "^1.6.14",
     "loader-utils": "^1.1.0",
     "node-eval": "^1.1.0"
   },
   "devDependencies": {
+    "@intervolga/bemdecl-loader": "^1.0.0",
+    "@intervolga/bemdeps-loader": "^1.1.0",
+    "@intervolga/bemjson-loader": "^1.1.0",
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "expect.js": "^0.3.1",
-    "@intervolga/bemdeps-loader": "^1.1.0",
-    "@intervolga/bemfs-loader": "^1.1.0",
-    "@intervolga/bemjson-loader": "^1.1.0",
+    "fs-extra": "^4.0.1",
     "mocha": "^3.4.2",
     "webpack": "^3.3.0"
   },

@@ -14,8 +14,8 @@ const techMap = {
   html: ['bh.js'],
 };
 
-module.exports = (entry, stringify = null) => {
-  let config = {
+module.exports = (entry) => {
+  return {
     entry: entry,
 
     output: {
@@ -25,49 +25,32 @@ module.exports = (entry, stringify = null) => {
     },
 
     module: {
-      loaders: [],
+      loaders: [{
+        test: /\.bemjson\.js$/,
+        use: [
+          {
+            loader: bemBHLoader,
+            options: {},
+          },
+          {
+            loader: '@intervolga/bemdeps-loader',
+            options: {
+              levels: levels,
+              techMap: techMap,
+            },
+          },
+          {
+            loader: '@intervolga/bemdecl-loader',
+            options: {
+              levels: levels,
+            },
+          },
+          '@intervolga/bemjson-loader',
+          '@intervolga/eval-loader',
+        ],
+      }],
     },
 
     target: 'node',
   };
-
-  let loaderConfig = {
-    test: /\.bemjson\.js$/,
-    use: [
-      {
-        loader: bemBHLoader,
-        options: {},
-      },
-      {
-        loader: '@intervolga/bemfs-loader',
-        options: {
-          levels: levels,
-          techMap: techMap,
-        },
-      },
-      {
-        loader: '@intervolga/bemdeps-loader',
-        options: {
-          levels: levels,
-          techMap: techMap,
-        },
-      },
-      {
-        loader: '@intervolga/bemjson-loader',
-        options: {},
-      },
-    ],
-  };
-  if (null !== stringify) {
-    loaderConfig.use[1].options = loaderConfig.use[1].options || {};
-    loaderConfig.use[1].options.stringify = stringify;
-    loaderConfig.use[2].options = loaderConfig.use[2].options || {};
-    loaderConfig.use[2].options.stringify = stringify;
-    loaderConfig.use[3].options = loaderConfig.use[3].options || {};
-    loaderConfig.use[3].options.stringify = stringify;
-  }
-
-  config.module.loaders.push(loaderConfig);
-
-  return config;
 };

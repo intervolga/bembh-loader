@@ -1,4 +1,5 @@
 const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 const expect = require('expect.js');
 const walkBemJson = require('./../lib/walk-bemjson');
@@ -118,8 +119,8 @@ describe('bembh-loader', () => {
     const changed = path.join(__dirname, 'levels', 'blocks.common',
       'add-template', 'add-template_original.bh.js');
 
-    fs.writeFileSync(source, fs.readFileSync(changed));
-    fs.unlinkSync(source);
+    fse.copySync(changed, source);
+    fse.removeSync(source);
 
     let firstRun = false;
     let firstTimerId = null;
@@ -133,7 +134,7 @@ describe('bembh-loader', () => {
 
         firstTimerId = setTimeout(() => {
           firstRun = true;
-          fs.writeFileSync(source, fs.readFileSync(changed));
+          fse.copySync(changed, source);
         }, 5000);
       } else {
         setTimeout(() => {
@@ -148,7 +149,7 @@ describe('bembh-loader', () => {
       }
     };
 
-    watchWebpack(paths.source, true, cb);
+    watchWebpack(paths.source, cb);
   });
 
   it('should invalidate cache when template removed', function(done) {
@@ -161,7 +162,7 @@ describe('bembh-loader', () => {
     const changed = path.join(__dirname, 'levels', 'blocks.common',
       'remove-template', 'remove-template_original.bh.js');
 
-    fs.writeFileSync(source, fs.readFileSync(changed));
+    fse.copySync(changed, source);
 
     let firstRun = false;
     let firstTimerId = null;
@@ -175,7 +176,7 @@ describe('bembh-loader', () => {
 
         firstTimerId = setTimeout(() => {
           firstRun = true;
-          fs.unlinkSync(source);
+          fse.removeSync(source);
         }, 5000);
       } else {
         setTimeout(() => {
@@ -190,7 +191,7 @@ describe('bembh-loader', () => {
       }
     };
 
-    watchWebpack(paths.source, true, cb);
+    watchWebpack(paths.source, cb);
   });
 });
 

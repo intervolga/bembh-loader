@@ -4,8 +4,8 @@ const webpack = require('webpack');
 const generateConfig = require('./generate-config');
 const requireNoCache = require('./require-no-cache');
 
-module.exports = (entry, stringify, cb) => {
-  const config = generateConfig(entry, stringify);
+module.exports = (entry, cb) => {
+  const config = generateConfig(entry);
   const compiler = webpack(config);
 
   compiler.watch({

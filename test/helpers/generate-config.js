@@ -30,7 +30,12 @@ module.exports = (entry) => {
         use: [
           {
             loader: bemBHLoader,
-            options: {},
+            options: {
+              images: {
+                test: /\.(jpe?g|png|gif)/i,
+                name: '[hash].[ext]',
+              },
+            },
           },
           {
             loader: '@intervolga/bemdeps-loader',

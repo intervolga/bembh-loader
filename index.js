@@ -3,7 +3,6 @@ const nodeEval = require('node-eval');
 const bh = require('bh');
 const path = require('path');
 const beautifyHtml = require('js-beautify').html;
-// const walkBemJson = require('./walk-bemjson');
 
 /**
  * BemBH loader
@@ -56,6 +55,9 @@ function bemBHLoader(source) {
     }
 
     const bemJson = nodeEval(source);
+    // TODO: replace images,
+    // maybe https://github.com/webpack-contrib/html-loader
+
     let html = engine.apply(bemJson);
 
     if (options.beautify) {
@@ -63,7 +65,6 @@ function bemBHLoader(source) {
       // .replace(/\s*\/\* beautify preserve:start \*\//g, '')
       // .replace(/\/\* beautify preserve:end \*\/\s*/g, '');
     }
-    // TODO: https://github.com/webpack-contrib/html-loader
 
     const newName = loaderUtils.interpolateName(this, options.name, {
       content: html,

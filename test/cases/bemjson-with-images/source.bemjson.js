@@ -3,24 +3,24 @@ module.exports = {
   content: [
     {
       block: 'img',
-      src: 'img/1.jpg'
+      src: 'img/img-1.png',
     },
     {
       block: 'img',
       attrs: {
-        src: 'img/1.jpg'
-      }
+        src: './img/img-1.png',
+      },
     },
     {
       block: 'img',
-      src: './../img/2.jpeg'
+      src: './../img/img-2.png',
     },
     {
       block: 'icons',
       content: [
-        './../img/3.png',
-        'img/4.png'
-      ]
+        './../img/img-3.jpg',
+        'img/img-4.png',
+      ],
     },
   ],
 };

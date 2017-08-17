@@ -1,9 +1,7 @@
 const loaderUtils = require('loader-utils');
 const nodeEval = require('node-eval');
-const bh = require('bh');
 const path = require('path');
 const beautifyHtml = require('js-beautify').html;
-// const walkBemJson = require('./walk-bemjson');
 
 /**
  * BemBH loader
@@ -14,6 +12,7 @@ function bemBHLoader(source) {
   const options = {
     beautify: true,
     name: '[name].html',
+    bhFilename: require.resolve('bh'),
     bhOptions: {
       jsAttrName: 'data-bem',
       jsAttrScheme: 'json',
@@ -26,7 +25,7 @@ function bemBHLoader(source) {
   let bemFS = nodeEval(source);
 
   // Prepare BH engine
-  const engine = new bh.BH;
+  const engine = new (require(options.bhFilename)).BH;
   engine.setOptions(options.bhOptions);
   bemFS.filter((fileName) => {
     return /\.bh\.js$/i.test(fileName);
@@ -56,6 +55,9 @@ function bemBHLoader(source) {
     }
 
     const bemJson = nodeEval(source);
+    // TODO: replace images,
+    // maybe https://github.com/webpack-contrib/html-loader
+
     let html = engine.apply(bemJson);
 
     if (options.beautify) {
@@ -63,7 +65,6 @@ function bemBHLoader(source) {
       // .replace(/\s*\/\* beautify preserve:start \*\//g, '')
       // .replace(/\/\* beautify preserve:end \*\/\s*/g, '');
     }
-    // TODO: https://github.com/webpack-contrib/html-loader
 
     const newName = loaderUtils.interpolateName(this, options.name, {
       content: html,

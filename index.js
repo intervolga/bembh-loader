@@ -1,6 +1,5 @@
 const loaderUtils = require('loader-utils');
 const nodeEval = require('node-eval');
-const bh = require('bh');
 const path = require('path');
 const beautifyHtml = require('js-beautify').html;
 
@@ -13,6 +12,7 @@ function bemBHLoader(source) {
   const options = {
     beautify: true,
     name: '[name].html',
+    bhFilename: require.resolve('bh'),
     bhOptions: {
       jsAttrName: 'data-bem',
       jsAttrScheme: 'json',
@@ -25,7 +25,7 @@ function bemBHLoader(source) {
   let bemFS = nodeEval(source);
 
   // Prepare BH engine
-  const engine = new bh.BH;
+  const engine = new (require(options.bhFilename)).BH;
   engine.setOptions(options.bhOptions);
   bemFS.filter((fileName) => {
     return /\.bh\.js$/i.test(fileName);

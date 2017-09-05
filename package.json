@@ -1,6 +1,6 @@
 {
   "name": "@intervolga/bembh-loader",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "BEM BH (https://en.bem.info/technology/bh/) loader for WebPack 2+",
   "main": "index.js",
   "scripts": {

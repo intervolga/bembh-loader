@@ -124,6 +124,7 @@ describe('bembh-loader', () => {
 
     let firstRun = false;
     let firstTimerId = null;
+    let secondRun = false;
     const cb = (result) => {
       expect(typeof result).to.be.a('string');
 
@@ -136,7 +137,8 @@ describe('bembh-loader', () => {
           firstRun = true;
           fse.copySync(changed, source);
         }, 5000);
-      } else {
+      } else if (!secondRun) {
+        secondRun = true;
         setTimeout(() => {
           expect(result).to.eql(require(paths.expected));
 
@@ -166,6 +168,7 @@ describe('bembh-loader', () => {
 
     let firstRun = false;
     let firstTimerId = null;
+    let secondRun = false;
     const cb = (result) => {
       expect(typeof result).to.be.a('string');
 
@@ -178,7 +181,8 @@ describe('bembh-loader', () => {
           firstRun = true;
           fse.removeSync(source);
         }, 5000);
-      } else {
+      } else if (!secondRun) {
+        secondRun = true;
         setTimeout(() => {
           expect(result).to.eql(require(paths.expected));
 

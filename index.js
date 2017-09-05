@@ -58,7 +58,13 @@ function bemBHLoader(source) {
     // TODO: replace images,
     // maybe https://github.com/webpack-contrib/html-loader
 
-    let html = engine.apply(bemJson);
+    let html;
+    try {
+      html = engine.apply(bemJson);
+    } catch (e) {
+      callback(e);
+      return;
+    }
 
     if (options.beautify) {
       html = beautifyHtml(html, {});

@@ -16,6 +16,8 @@ const techMap = {
 
 module.exports = (entry) => {
   return {
+    mode: 'development',
+
     entry: entry,
 
     output: {
@@ -25,7 +27,7 @@ module.exports = (entry) => {
     },
 
     module: {
-      loaders: [{
+      rules: [{
         test: /\.bemjson\.js$/,
         use: [
           {

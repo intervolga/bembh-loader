@@ -125,6 +125,7 @@ describe('bembh-loader', () => {
     let firstRun = false;
     let firstTimerId = null;
     let secondRun = false;
+    let watching;
     const cb = (result) => {
       expect(typeof result).to.be.a('string');
 
@@ -140,6 +141,7 @@ describe('bembh-loader', () => {
       } else if (!secondRun) {
         secondRun = true;
         setTimeout(() => {
+          watching && watching.close();
           expect(result).to.eql(require(paths.expected));
 
           const producedHtml = fs.readFileSync(paths.out_produced).toString();
@@ -151,7 +153,7 @@ describe('bembh-loader', () => {
       }
     };
 
-    watchWebpack(paths.source, cb);
+    watching = watchWebpack(paths.source, cb);
   });
 
   it('should invalidate cache when template removed', function(done) {
@@ -169,6 +171,7 @@ describe('bembh-loader', () => {
     let firstRun = false;
     let firstTimerId = null;
     let secondRun = false;
+    let watching;
     const cb = (result) => {
       expect(typeof result).to.be.a('string');
 
@@ -184,6 +187,7 @@ describe('bembh-loader', () => {
       } else if (!secondRun) {
         secondRun = true;
         setTimeout(() => {
+          watching && watching.close();
           expect(result).to.eql(require(paths.expected));
 
           const producedHtml = fs.readFileSync(paths.out_produced).toString();
@@ -195,7 +199,7 @@ describe('bembh-loader', () => {
       }
     };
 
-    watchWebpack(paths.source, cb);
+    watching = watchWebpack(paths.source, cb);
   });
 });
 

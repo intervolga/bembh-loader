@@ -1,14 +1,38 @@
 [
-  "test/levels/blocks.plugins/jquery/jquery.js",
-  "test/levels/blocks.plugins/lightbox/lightbox.css",
-  "test/levels/blocks.plugins/lightbox/lightbox.js",
-  "test/levels/blocks.plugins/datepicker/datepicker.css",
-  "test/levels/blocks.plugins/datepicker/datepicker.js",
-  "test/levels/blocks.common/datepicker/datepicker.css",
-  "test/levels/blocks.common/datepicker/datepicker.js",
-  "test/levels/blocks.common/datepicker/_popup/datepicker_popup.js",
-  "test/levels/blocks.common/rating/rating.scss",
-  "test/levels/blocks.common/rating/rating.js",
-  "test/levels/blocks.project/news-list/news-list.css",
-  "test/levels/blocks.project/news-list/__item/news-list__item.css"
+  {
+    "require": "test/levels/blocks.plugins/jquery/jquery.js"
+  },
+  {
+    "require": "test/levels/blocks.plugins/lightbox/lightbox.css"
+  },
+  {
+    "require": "test/levels/blocks.plugins/lightbox/lightbox.js"
+  },
+  {
+    "require": "test/levels/blocks.plugins/datepicker/datepicker.css"
+  },
+  {
+    "require": "test/levels/blocks.plugins/datepicker/datepicker.js"
+  },
+  {
+    "require": "test/levels/blocks.common/datepicker/datepicker.css"
+  },
+  {
+    "require": "test/levels/blocks.common/datepicker/datepicker.js"
+  },
+  {
+    "require": "test/levels/blocks.common/datepicker/_popup/datepicker_popup.js"
+  },
+  {
+    "require": "test/levels/blocks.common/rating/rating.scss"
+  },
+  {
+    "require": "test/levels/blocks.common/rating/rating.js"
+  },
+  {
+    "require": "test/levels/blocks.project/news-list/news-list.css"
+  },
+  {
+    "require": "test/levels/blocks.project/news-list/__item/news-list__item.css"
+  }
 ]

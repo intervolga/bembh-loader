@@ -2,79 +2,9 @@ const fs = require('fs');
 const fse = require('fs-extra');
 const path = require('path');
 const expect = require('expect.js');
-const walkBemJson = require('./../lib/walk-bemjson');
 const runWebpack = require('./helpers/run-webpack');
 const watchWebpack = require('./helpers/watch-webpack');
 
-describe('walk-bemjson', () => {
-  it('should run callback on each string value', (done) => {
-    const testBemJson = [
-      {
-        block: 'no-replace',
-        content: [
-          'a.jpg',
-          'no-replace',
-        ],
-      },
-      [
-        'a.jpg',
-        {
-          block: 'image',
-          src: 'a.jpg',
-          attrs: {
-            'data-href': 'a.jpg',
-            'no-replace': 'sdf',
-            'no-replace.jpg': 'tmp',
-          },
-        },
-      ],
-      'no replace',
-      'a.jpg',
-      '/a.jpg',
-    ];
-
-    const expectedBemJson = [
-      {
-        'block': 'no-replace',
-        'content': [
-          '---replaced---',
-          'no-replace',
-        ],
-      },
-      [
-        '---replaced---',
-        {
-          'block': 'image',
-          'src': '---replaced---',
-          'attrs': {
-            'data-href': '---replaced---',
-            'no-replace': 'sdf',
-            'no-replace.jpg': 'tmp',
-          },
-        },
-      ],
-      'no replace',
-      '---replaced---',
-      '---replaced---',
-    ];
-
-    const result = walkBemJson(testBemJson, (val) => {
-      if (typeof val !== 'string') {
-        return val;
-      }
-
-      if (!/\.jpg$/i.test(val)) {
-        return val;
-      }
-
-      return '---replaced---';
-    });
-
-    expect(result).to.eql(expectedBemJson);
-
-    done();
-  });
-});
 
 describe('bembh-loader', () => {
   it('should pass normal bemjson', () => {

@@ -92,64 +92,16 @@ function bemBHLoader(source) {
     });
 
     if (options.client) {
-      // Stringify engine path and options
-      const bhClientEngine = loaderUtils.stringifyRequest(
-        self, options.bhFilename);
-      const bhClientOptions = JSON.stringify(options.bhOptions);
-
-      let bhClientSource;
-      if (options.client == 'static') {
-        // Stringify templates
-        const bhClientTemplates = bhTemplates.map((fileName) => {
-          let safeTemplate = loaderUtils.stringifyRequest(self, fileName);
-          return `require(${safeTemplate})(BH);`;
-        }).join('\n');
-
-
-        // Static BH for client
-        bhClientSource = `
-          (function(){
-            const BH = new (require(${bhClientEngine})).BH;
-            BH.setOptions(${bhClientOptions});
-            ${bhClientTemplates}
-    
-            window.getBH = (cb) => {
-              cb(BH);
-            };
-          })();`;
-      } else {
-        const bhClientTemplates = bhTemplates.map((fileName) => {
-          let safeTemplate = loaderUtils.stringifyRequest(self, fileName);
-          return `import(${safeTemplate})`;
-        }).join(', ');
-
-        bhClientSource = `
-          window.getBH = (cb) => {
-            const requireBH = import(${bhClientEngine})
-              .then((bhModule) => {
-                const BH = new bhModule.BH;
-                BH.setOptions(${bhClientOptions});
-                return BH;
-              });
-            
-            const requireTemplates = [${bhClientTemplates}];
-          
-            Promise.all([
-              requireBH,
-              Promise.all(requireTemplates)
-            ]).then((results) => {
-              const BH = results[0];
-              const templates = results[1];
-          
-              templates.forEach((template) => {
-                template.default(BH);
-              });
-          
-              cb(BH);
-            });
-          };`;
-      }
-
+      const bhClientTemplates = bhTemplates.map((fileName) => {
+        let safeTemplate = loaderUtils.stringifyRequest(self, fileName);
+        return `window.matches[${safeTemplate}] = window.matches[${safeTemplate}] || require(${safeTemplate})(bh) || true;`;
+      }).join('\n');
+      const bhClientSource = `
+        window.initMatches = window.initMatches ? window.initMatches : [];
+        window.initMatches.push(function (bh) {
+        window.matches = window.matches ? window.matches : [];
+          ${bhClientTemplates}
+      });`;
       bemFS.splice(0, 0, {'raw': bhClientSource});
     }
 

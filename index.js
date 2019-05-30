@@ -94,7 +94,9 @@ function bemBHLoader(source) {
     if (options.client) {
       const bhClientTemplates = bhTemplates.map((fileName) => {
         let safeTemplate = loaderUtils.stringifyRequest(self, fileName);
-        return `window.matches[${safeTemplate}] = window.matches[${safeTemplate}] || require(${safeTemplate})(bh) || true;`;
+        return `window.matches[${safeTemplate}] = ' +
+          'window.matches[${safeTemplate}] || ' +
+          'require(${safeTemplate})(bh) || true;`;
       }).join('\n');
       const bhClientSource = `
         window.initMatches = window.initMatches ? window.initMatches : [];

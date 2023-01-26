@@ -2,6 +2,7 @@ const loaderUtils = require('loader-utils');
 const nodeEval = require('node-eval');
 const path = require('path');
 const beautifyHtml = require('js-beautify').html;
+const stack = [];
 
 /**
  * BemBH loader
@@ -92,18 +93,18 @@ function bemBHLoader(source) {
     });
 
     if (options.client) {
-      const bhClientTemplates = bhTemplates.map((fileName) => {
+      const templates = bhTemplates.filter(item => !~stack.indexOf(item));
+      const bhClientTemplates = templates.map((fileName) => {
         let safeTemplate = loaderUtils.stringifyRequest(self, fileName);
-        return `window.matches[${safeTemplate}] =
-          window.matches[${safeTemplate}] ||
-          require(${safeTemplate})(bh) || true;`;
+        return `window.matches[${safeTemplate}] = window.matches[${safeTemplate}] || require(${safeTemplate})(bh) || true;`;
       }).join('\n');
       const bhClientSource = `
         window.initMatches = window.initMatches ? window.initMatches : [];
         window.initMatches.push(function (bh) {
-        window.matches = window.matches ? window.matches : [];
+          window.matches = window.matches ? window.matches : [];
           ${bhClientTemplates}
-      });`;
+        });`;
+      stack.push(...bhTemplates);
       bemFS.splice(0, 0, {'raw': bhClientSource});
     }
 

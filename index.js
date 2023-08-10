@@ -2,7 +2,6 @@ const loaderUtils = require('loader-utils');
 const nodeEval = require('node-eval');
 const path = require('path');
 const beautifyHtml = require('js-beautify').html;
-const stack = [];
 
 /**
  * BemBH loader
@@ -10,6 +9,7 @@ const stack = [];
  * @param {String} source
  */
 function bemBHLoader(source) {
+  const stack = [];
   const options = {
     beautify: true,
     name: '[name].html',
